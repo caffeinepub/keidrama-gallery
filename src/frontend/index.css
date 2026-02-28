@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Fraunces (display) ── */
+@font-face {
+  font-family: "Fraunces";
+  src: url("/assets/fonts/Fraunces.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Outfit (body) ── */
+@font-face {
+  font-family: "Outfit";
+  src: url("/assets/fonts/Outfit.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* KeiDrama palette — dark cinematic theme */
+    --background: 0.12 0.008 280;
+    --foreground: 0.95 0.01 340;
+
+    --card: 0.16 0.012 270;
+    --card-foreground: 0.95 0.01 340;
+
+    --popover: 0.18 0.014 270;
+    --popover-foreground: 0.95 0.01 340;
+
+    /* Rose-pink primary */
+    --primary: 0.65 0.22 355;
+    --primary-foreground: 0.98 0 0;
+
+    /* Deep purple secondary */
+    --secondary: 0.25 0.04 280;
+    --secondary-foreground: 0.88 0.02 340;
+
+    --muted: 0.2 0.015 275;
+    --muted-foreground: 0.6 0.025 300;
+
+    /* Lavender accent */
+    --accent: 0.35 0.06 285;
+    --accent-foreground: 0.9 0.02 340;
+
+    --destructive: 0.65 0.22 25;
+    --destructive-foreground: 0.98 0 0;
+
+    --border: 0.28 0.025 280;
+    --input: 0.22 0.018 278;
+    --ring: 0.65 0.22 355;
+
+    /* Golden star color */
+    --star: 0.78 0.18 72;
+
+    /* Chart colors */
+    --chart-1: 0.65 0.22 355;
+    --chart-2: 0.55 0.18 280;
+    --chart-3: 0.78 0.18 72;
+    --chart-4: 0.6 0.2 200;
+    --chart-5: 0.7 0.16 340;
+
+    /* Sidebar */
+    --sidebar: 0.14 0.01 275;
+    --sidebar-foreground: 0.95 0.01 340;
+    --sidebar-primary: 0.65 0.22 355;
+    --sidebar-primary-foreground: 0.98 0 0;
+    --sidebar-accent: 0.25 0.04 280;
+    --sidebar-accent-foreground: 0.88 0.02 340;
+    --sidebar-border: 0.28 0.025 280;
+    --sidebar-ring: 0.65 0.22 355;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    background-image:
+      radial-gradient(ellipse at 20% 0%, oklch(0.22 0.04 290 / 0.4) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 100%, oklch(0.2 0.04 340 / 0.3) 0%, transparent 60%);
+    background-attachment: fixed;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Fraunces", Georgia, serif;
+  }
+  .font-body {
+    font-family: "Outfit", system-ui, sans-serif;
+  }
+
+  /* Cinematic card glow */
+  .card-glow {
+    box-shadow:
+      0 0 0 1px oklch(var(--border)),
+      0 4px 24px oklch(0.65 0.22 355 / 0.08),
+      0 1px 3px oklch(0 0 0 / 0.4);
+  }
+
+  .card-glow:hover {
+    box-shadow:
+      0 0 0 1px oklch(0.65 0.22 355 / 0.5),
+      0 8px 40px oklch(0.65 0.22 355 / 0.18),
+      0 2px 8px oklch(0 0 0 / 0.5);
+  }
+
+  /* Film grain overlay */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  /* Star golden color */
+  .text-star {
+    color: oklch(var(--star));
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    background: linear-gradient(135deg, oklch(0.78 0.22 355), oklch(0.65 0.18 300));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glass morphism panel */
+  .glass {
+    background: oklch(var(--card) / 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(var(--border));
+    border-radius: 3px;
+  }
+}
